@@ -1,0 +1,23 @@
+Given a list arr of N integers, print sums of all subsets in it.
+
+class Solution
+{
+public:
+    void solve(int ind,vector<int>&ds,int sum,vector<int>& arr,int N){
+        if(ind == N)
+        {
+            ds.push_back(sum);
+            return;
+        }
+        solve(ind+1,ds,sum+arr[ind],arr,N);
+        
+        solve(ind+1,ds,sum,arr,N);
+    }
+    vector<int> subsetSums(vector<int> arr, int N)
+    {
+        vector<int> ds;
+        int ind =0;
+        solve(ind,ds,0,arr,N);
+        return ds;
+    }
+};
