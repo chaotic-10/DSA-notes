@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) 
+    {   ListNode *temp;
+        temp = head;
+        //declare stack
+        stack <int> s;
+        
+        //stack me pelo list
+        while(temp!=NULL)
+        {
+            s.push(temp->val);
+            temp= temp->next;
+        }
+        //stack se match krenge list ko.
+        while(head!=NULL)
+            {
+                int i = s.top();
+                s.pop();
+                if(head->val!=i)
+                {
+                    return false;
+                }
+               head= head->next;
+            }
+            return true;
+    }
+};
+//sc : o(N)
+//tc : o(n)
