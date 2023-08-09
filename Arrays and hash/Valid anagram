@@ -1,0 +1,10 @@
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        sort(s.begin(), s.end());  // Sort string s
+        sort(t.begin(), t.end());  // Sort string t
+        
+        return s == t;  // Compare the sorted strings
+    }
+};
+// TC : ONLOGN SC : O1 
