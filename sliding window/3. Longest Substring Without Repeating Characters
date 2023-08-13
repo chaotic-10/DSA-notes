@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        unordered_set<char> check;
+        int maxi = 0;
+        int count = 0;
+        int left = 0;  // This variable tracks the left boundary of the current substring
+
+        for (int i = 0; i < s.length(); i++) {
+            while (check.find(s[i]) != check.end()) {
+                check.erase(s[left]);
+                left++;
+                count--;
+            }
+
+            check.insert(s[i]);
+            count++;
+            maxi = max(maxi, count);
+        }
+
+        return maxi;
+    }
+};
