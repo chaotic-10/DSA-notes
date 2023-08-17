@@ -1,0 +1,50 @@
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
+int minDeletions(string str, int n);
+
+int main(){
+    int t;
+    cin >> t;
+    while(t--){
+        
+        int n;
+        cin >> n;
+        string s;
+        cin >> s;
+        cout << minDeletions(s, n) << endl;
+
+    }
+return 0;
+}
+// } Driver Code Ends
+
+int t[1001][1001]; // Creating a cache memory for fast response
+
+int LPS(string &s1, string &s2, int m, int n){
+    // If any or both are empty,then there'll be no LCS, hence return '-1'
+    if(m == 0 || n == 0) return 0;
+    
+    // If subproblem is already calculated then just return answer from there
+    if(t[m][n] != -1) return t[m][n];
+    
+    // If valid LCS then process for next element in both string
+    if(s1[m-1] == s2[n-1]){
+        return t[m][n] = 1 + LPS(s1, s2, m-1, n-1);
+    }
+    // Else process both reduced string one by one
+    else{
+        return t[m][n] = max(LPS(s1, s2, m-1, n), LPS(s1, s2, m, n-1));
+    }
+}
+
+int minDeletions(string str, int n) { 
+    // Initializing cache memory with all '-1'
+    memset(t, -1, sizeof(t));
+    
+    // Creating a reverse string of given string 'str'
+    string rev_str = string(str.rbegin(), str.rend());
+    
+    // ans =  n - LPS, calculate it
+    return n - LPS(str, rev_str, n, n);
+} 
