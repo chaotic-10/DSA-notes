@@ -1,0 +1,24 @@
+
+Node* removeDuplicates(Node* head) 
+{
+    if (!head || !head->next) {
+        return head; // Handle empty list or single node
+    }
+    unordered_set<int> s;
+    Node* current = head;
+    Node* dummy = nullptr;
+
+    while (current) {
+        if (s.find(current->data) != s.end())
+        {
+            dummy->next = current->next;
+            delete current;
+            current = dummy->next;
+        } else {
+            s.insert(current->data);
+            dummy = current;
+            current = current->next;
+        }
+    }
+    return head;
+}
