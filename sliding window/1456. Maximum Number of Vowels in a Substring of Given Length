@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int numOfSubarrays(vector<int>& arr, int k, int threshold) {
+        int count = 0, i = 0, j = 0, sum = 0;
+        double avg;
+
+        while (j < arr.size()) {
+            sum += arr[j];
+
+            if (j - i + 1 == k) {
+                avg = double(sum) / k;
+                if (avg >=threshold) {
+                    count++;
+                }
+                sum -= arr[i];
+                i++;
+            }
+
+            j++;
+        }
+
+        return count;
+    }
+};
