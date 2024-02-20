@@ -1,0 +1,28 @@
+#include <algorithm>
+
+class Solution {
+public:
+    // Function to check if array has 2 elements
+    // whose sum is equal to the given value
+    bool hasArrayTwoCandidates(int arr[], int n, int x) {
+        if (n < 2) {
+            return false; // Array should have at least two elements
+        }
+
+        std::sort(arr, arr + n);
+        int i = 0, j = n - 1; // Initialize j to the last index
+
+        // Using 2 pointer approach
+        while (i < j) {
+            if (arr[i] + arr[j] == x) {
+                return true;
+            } else if (arr[i] + arr[j] < x) {
+                i++;
+            } else {
+                j--;
+            }
+        }
+
+        return false;
+    }
+};
